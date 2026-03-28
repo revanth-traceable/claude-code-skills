@@ -1,0 +1,53 @@
+{
+  "projector": {
+    "conditionalProjector": {
+      "predicate": {
+        "attributePredicate": {
+          "namePredicate": {
+            "operator": "COMPARISON_OPERATOR_EQUALS",
+            "value": "http.response.header.accesstoken"
+          },
+          "valuePredicate": {
+            "operator": "COMPARISON_OPERATOR_MATCHES_REGEX",
+            "value": "."
+          }
+        }
+      },
+      "attributeRule": {
+        "projector": {
+          "attributeProjector": {
+            "attributeKey": "http.response.header.accesstoken",
+            "attributeRule": {
+              "projector": {
+                "regexCaptureGroupProjector": {
+                  "regexCaptureGroup": "^(.*)$",
+                  "attributeRule": {
+                    "initialActions": [
+                      {
+                        "attributeAddition": {
+                          "attributeKey": "enduser.id",
+                          "valueProjectionRule": {
+                            "projector": {
+                              "jwtProjector": {
+                                "claimRule": {
+                                  "key": "sub",
+                                  "attributeRule": {
+                                    "projector": { "noOpProjector": {} }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

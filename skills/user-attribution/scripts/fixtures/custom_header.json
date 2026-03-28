@@ -1,0 +1,6 @@
+{
+  "http.url": "https://api.example.com/resource",
+  "http.request.header.x-api-key": "ak_prod_12345",
+  "http.request.header.x-user-id": "user-12345",
+  "http.request.header.x-user-role": "admin"
+}

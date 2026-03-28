@@ -1,0 +1,54 @@
+{
+  "projector": {
+    "conditionalProjector": {
+      "predicate": {
+        "attributePredicate": {
+          "namePredicate": {
+            "operator": "COMPARISON_OPERATOR_EQUALS",
+            "value": "http.request.header.x-api-key"
+          },
+          "valuePredicate": {
+            "operator": "COMPARISON_OPERATOR_MATCHES_REGEX",
+            "value": ".+"
+          }
+        }
+      },
+      "attributeRule": {
+        "projector": {
+          "attributeProjector": {
+            "attributeKey": "http.request.header.x-api-key",
+            "attributeRule": {
+              "projector": {
+                "regexCaptureGroupProjector": {
+                  "regexCaptureGroup": "^(.*)$",
+                  "attributeRule": {
+                    "initialActions": [
+                      {
+                        "attributeAddition": {
+                          "attributeKey": "enduser.id",
+                          "valueProjectionRule": {
+                            "projector": { "noOpProjector": {} }
+                          }
+                        }
+                      },
+                      {
+                        "attributeArrayAppend": {
+                          "attributeKey": "traceableai.auth.types",
+                          "valueProjectionRule": {
+                            "projector": {
+                              "valueProjector": { "value": "ApiKey" }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

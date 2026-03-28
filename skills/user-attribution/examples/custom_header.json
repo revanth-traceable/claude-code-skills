@@ -1,0 +1,26 @@
+{
+  "projector": {
+    "attributeProjector": {
+      "attributeKey": "http.request.header.x-user-id",
+      "attributeRule": {
+        "projector": {
+          "regexCaptureGroupProjector": {
+            "regexCaptureGroup": "^(.*)$",
+            "attributeRule": {
+              "initialActions": [
+                {
+                  "attributeAddition": {
+                    "attributeKey": "enduser.id",
+                    "valueProjectionRule": {
+                      "projector": { "noOpProjector": {} }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

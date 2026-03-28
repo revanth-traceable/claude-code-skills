@@ -1,0 +1,104 @@
+{
+  "projector": {
+    "conditionalProjector": {
+      "predicate": {
+        "attributePredicate": {
+          "namePredicate": {
+            "operator": "COMPARISON_OPERATOR_EQUALS",
+            "value": "http.request.header.authorization"
+          },
+          "valuePredicate": {
+            "operator": "COMPARISON_OPERATOR_MATCHES_REGEX",
+            "value": "Bearer"
+          }
+        }
+      },
+      "attributeRule": {
+        "projector": {
+          "attributeProjector": {
+            "attributeKey": "http.request.header.authorization",
+            "attributeRule": {
+              "projector": {
+                "regexCaptureGroupProjector": {
+                  "regexCaptureGroup": "^(?:(?i)Bearer:? )?(.*)$",
+                  "attributeRule": {
+                    "initialActions": [
+                      {
+                        "attributeAddition": {
+                          "attributeKey": "token.jwt.payload.http.request.header.authorization.iss",
+                          "valueProjectionRule": {
+                            "projector": {
+                              "jwtProjector": {
+                                "claimRule": {
+                                  "key": "iss",
+                                  "attributeRule": {
+                                    "projector": { "noOpProjector": {} }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "attributeAddition": {
+                          "attributeKey": "token.jwt.payload.http.request.header.authorization.sub",
+                          "valueProjectionRule": {
+                            "projector": {
+                              "jwtProjector": {
+                                "claimRule": {
+                                  "key": "sub",
+                                  "attributeRule": {
+                                    "projector": { "noOpProjector": {} }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "attributeAddition": {
+                          "attributeKey": "token.jwt.payload.http.request.header.authorization.iat",
+                          "valueProjectionRule": {
+                            "projector": {
+                              "jwtProjector": {
+                                "claimRule": {
+                                  "key": "iat",
+                                  "attributeRule": {
+                                    "projector": { "noOpProjector": {} }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "attributeAddition": {
+                          "attributeKey": "token.jwt.payload.http.request.header.authorization.exp",
+                          "valueProjectionRule": {
+                            "projector": {
+                              "jwtProjector": {
+                                "claimRule": {
+                                  "key": "exp",
+                                  "attributeRule": {
+                                    "projector": { "noOpProjector": {} }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

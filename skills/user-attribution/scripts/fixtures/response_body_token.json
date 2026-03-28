@@ -1,0 +1,4 @@
+{
+  "http.url": "https://api.example.com/v1/oauth2/token",
+  "http.response.body": "{\"access_token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMTIzIiwic2NvcGUiOiJyZWFkIHdyaXRlIn0.xxx\", \"refresh_token\": \"rt_abc123\", \"scope\": \"read write admin\", \"expires_in\": 3600, \"token_type\": \"bearer\"}"
+}

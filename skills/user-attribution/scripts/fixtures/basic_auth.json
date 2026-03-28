@@ -1,0 +1,4 @@
+{
+  "http.url": "https://api.example.com/resource",
+  "http.request.header.authorization": "Basic dXNlcjpwYXNzd29yZA=="
+}

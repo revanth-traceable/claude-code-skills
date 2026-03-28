@@ -1,0 +1,46 @@
+{
+  "projector": {
+    "conditionalProjector": {
+      "predicate": {
+        "attributePredicate": {
+          "namePredicate": {
+            "operator": "COMPARISON_OPERATOR_EQUALS",
+            "value": "http.url"
+          },
+          "valuePredicate": {
+            "operator": "COMPARISON_OPERATOR_MATCHES_REGEX",
+            "value": ".*/v1/oauth2/token"
+          }
+        }
+      },
+      "attributeRule": {
+        "projector": {
+          "attributeProjector": {
+            "attributeKey": "http.response.body",
+            "attributeRule": {
+              "projector": {
+                "jsonProjector": {
+                  "jsonPathRule": {
+                    "key": "$.scope",
+                    "attributeRule": {
+                      "initialActions": [
+                        {
+                          "attributeAddition": {
+                            "attributeKey": "session.scopes",
+                            "valueProjectionRule": {
+                              "projector": { "noOpProjector": {} }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

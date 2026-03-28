@@ -1,0 +1,4 @@
+{
+  "http.url": "https://api.example.com/login",
+  "http.request.body": "{\"username\": \"john.doe\", \"password\": \"secret123\"}"
+}

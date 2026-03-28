@@ -1,0 +1,62 @@
+{
+  "projector": {
+    "attributeProjector": {
+      "attributeKey": "http.request.header.authorization",
+      "attributeRule": {
+        "projector": {
+          "regexCaptureGroupProjector": {
+            "regexCaptureGroup": "^(?i:Bearer) (.*)$",
+            "attributeRule": {
+              "initialActions": [
+                {
+                  "attributeAddition": {
+                    "attributeKey": "enduser.id",
+                    "valueProjectionRule": {
+                      "projector": {
+                        "jwtProjector": {
+                          "claimRule": {
+                            "key": "sub",
+                            "attributeRule": {
+                              "projector": { "noOpProjector": {} }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "attributeAddition": {
+                    "attributeKey": "enduser.role",
+                    "valueProjectionRule": {
+                      "projector": {
+                        "jwtProjector": {
+                          "claimRule": {
+                            "key": "role",
+                            "attributeRule": {
+                              "projector": { "noOpProjector": {} }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "attributeArrayAppend": {
+                    "attributeKey": "traceableai.auth.types",
+                    "valueProjectionRule": {
+                      "projector": {
+                        "valueProjector": { "value": "Bearer" }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
