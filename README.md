@@ -4,8 +4,8 @@
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/Traceableai/user-attribution.git
-cp -r user-attribution/skills/user-attribution ~/.claude/skills/
+git clone https://github.com/Traceableai/claude-code-skills.git
+cp -r claude-code-skills/skills/user-attribution ~/.claude/skills/
 ```
 
 ## Sample Questions
